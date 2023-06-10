@@ -1,0 +1,14 @@
+.container {
+    text-align: center;
+    margin-top: 100px;
+  }
+  
+  #timer {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    margin: 5px;
+  }
