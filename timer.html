@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pomodoro Timer</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pomodoro Timer</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="timer-container">
-        <h1>Pomodoro Timer</h1>
-        <div id="timer">00:00</div>
-        <button id="start">Start</button>
-        <button id="pause">Pause</button>
-        <button id="reset">Reset</button>
-    </div>
-    <script src="script.js"></script>
+  <div class="timer-container">
+      <div class="container">
+          <h1>Pomodoro Timer</h1>
+          <div id="timer">25:00</div>
+          <div id="progress-bar">
+              <div id="progress"></div>
+            </div>
+            <div id="popup">
+                <h2>Time is up!</h2>
+                <p>Take a break.</p>
+              </div>      
+            <div class="buttons">
+                <button id="start" class="btn btn-white btn-animate">Start</button>
+                <button id="pause" class="btn btn-white btn-animate">Pause</button>
+                <button id="reset" class="btn btn-white btn-animate">Reset</button>
+            </div>
+        </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

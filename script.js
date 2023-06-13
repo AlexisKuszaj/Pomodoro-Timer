@@ -1,46 +1,64 @@
-const timerDisplay = document.getElementById('timer')
-const startButton = document.getElementById('start')
-const pauseButton = document.getElementById('pause')
-const resetButton= document.getElementById('reset')
+const timerDisplay = document.getElementById('timer');
+const progressBar = document.getElementById('progress');
+const startButton = document.getElementById('start');
+const pauseButton = document.getElementById('pause');
+const resetButton = document.getElementById('reset');
 
 let timer;
-let minutes = 60;
-let seconds = 0;
+let totalTime = 1500; 
+let remainingTime = totalTime;
+let isTimerRunning = false;
 
 function updateTimerDisplay() {
-    timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  const minutes = Math.floor(remainingTime / 60);
+  const seconds = remainingTime % 60;
+  timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+}
+
+function updateProgressBar() {
+  const progressPercentage = (remainingTime / totalTime) * 100;
+  progressBar.style.transform = `scaleX(${progressPercentage / 100})`;
 }
 
 function startTimer() {
-    timer = setInterval(() => {
-        if(minutes === 0 && seconds === 0) {
-            clearInterval(timer);
-            alert('Time is up! Take a break.')
-            return;
-        }
+  if (isTimerRunning) {
+    return; 
+  }
 
-        if (seconds === 0) {
-            minutes--;
-            seconds = 59;
-        } else {
-            seconds--;
-        }
-    
+  timer = setInterval(() => {
+    if (remainingTime === 0) {
+      clearInterval(timer);
+      alert('Time is up! Take a break.');
+      isTimerRunning = false;
+      return;
+    }
 
-        updateTimerDisplay();
-    }, 1000);
+    remainingTime--;
+    updateTimerDisplay();
+    updateProgressBar();
+  }, 1000);
+
+  isTimerRunning = true;
 }
 
 function pauseTimer() {
-    clearInterval(timer);
+  clearInterval(timer);
+  isTimerRunning = false;
 }
 
 function resetTimer() {
-    minutes = 60;
-    seconds = 0;
-    updateTimerDisplay();
+  clearInterval(timer);
+  remainingTime = totalTime;
+  updateTimerDisplay();
+  updateProgressBar();
+  isTimerRunning = false;
 }
 
+// Event listeners
 startButton.addEventListener('click', startTimer);
 pauseButton.addEventListener('click', pauseTimer);
 resetButton.addEventListener('click', resetTimer);
+
+// Initial display
+updateTimerDisplay();
+updateProgressBar();
